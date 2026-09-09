@@ -12,7 +12,7 @@ interface Message {
 export default function AIChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "ai", content: "مرحباً! أنا مساعد THAMAR AI الذكي. كيف يمكنني مساعدتك في تحليل منتجاتك أو معرفة المزيد عن الاقتصاد الدائري؟" }
+    { role: "ai", content: "مرحباً! أنا مساعد ثمر الذكي. صور لي منتجك الغذائي أو اسألني وسأقترح عليك أفضل طرق حفظه أو وصفات لتحضيره!" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -83,8 +83,8 @@ export default function AIChatWidget() {
                   <Bot className="w-6 h-6 text-gold" />
                 </div>
                 <div>
-                  <h3 className="font-bold">مساعد THAMAR</h3>
-                  <p className="text-xs text-gray-300">متصل الآن (Gemini 1.5 Flash)</p>
+                  <h3 className="font-bold">مساعد ثمر</h3>
+                  <p className="text-xs text-gray-300">متصل الآن (Gemini)</p>
                 </div>
               </div>
               <button onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-white transition-colors">

@@ -3,33 +3,23 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Globe } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const links = [
     { href: "/", label: "الرئيسية" },
-    { href: "/scanner", label: "الفحص الذكي" },
-    { href: "/bio-wrap", label: "الغلاف الحيوي" },
-    { href: "/insights", label: "الرؤى الذكية" },
-    { href: "/dashboard", label: "لوحة التحكم" },
-    { href: "/prediction", label: "توقع الصلاحية" },
+    { href: "#how-it-works", label: "كيف يعمل؟" },
+    { href: "#features", label: "مميزات ثمر" },
+    { href: "#faq", label: "الأسئلة الشائعة" },
+    { href: "#about", label: "عن ثمر" },
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 py-2" : "bg-transparent py-4"
-    }`}>
+    <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-100 shadow-sm py-3">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
@@ -42,9 +32,7 @@ export default function Navbar() {
                 key={link.href} 
                 href={link.href}
                 className={`text-sm font-bold transition-colors duration-200 ${
-                  pathname === link.href 
-                    ? "text-primary border-b-2 border-primary pb-1" 
-                    : scrolled ? "text-secondary hover:text-primary" : "text-white hover:text-gold"
+                  pathname === link.href ? "text-primary" : "text-secondary hover:text-primary"
                 }`}
               >
                 {link.label}
@@ -52,25 +40,25 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <button className={`flex items-center gap-1 text-sm font-bold transition-colors ${scrolled ? 'text-secondary hover:text-primary' : 'text-white hover:text-gold'}`}>
+          <div className="hidden lg:flex items-center gap-6">
+            <button className="flex items-center gap-1 text-sm font-bold text-secondary hover:text-primary transition-colors">
               <Globe className="w-4 h-4" />
               العربية / EN
             </button>
-            <div className={`h-6 w-px ${scrolled ? 'bg-gray-300' : 'bg-white/30'}`}></div>
-            <button className={`text-sm font-bold transition-colors ${scrolled ? 'text-secondary hover:text-primary' : 'text-white hover:text-gold'}`}>
+            <div className="h-6 w-px bg-gray-200"></div>
+            <button className="text-sm font-bold text-secondary hover:text-primary transition-colors">
               تسجيل الدخول
             </button>
-            <button className="bg-primary hover:bg-primary-dark text-white px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg shadow-primary/20">
+            <button className="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-md shadow-primary/20">
               إنشاء حساب
             </button>
           </div>
 
           <button 
-            className={`lg:hidden ${scrolled ? 'text-secondary' : 'text-white'}`}
+            className="lg:hidden text-secondary"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X /> : <Menu />}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
@@ -83,20 +71,18 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className={`block text-lg font-bold ${
-                pathname === link.href ? "text-primary" : "text-secondary"
-              }`}
+              className="block text-lg font-bold text-secondary hover:text-primary"
             >
               {link.label}
             </Link>
           ))}
-          <hr className="border-gray-100 my-2" />
+          <hr className="border-gray-100 my-4" />
           <div className="flex flex-col gap-4">
             <button className="flex items-center gap-2 text-secondary font-bold">
               <Globe className="w-5 h-5" /> العربية / English
             </button>
-            <button className="text-secondary font-bold text-right">تسجيل الدخول</button>
-            <button className="bg-primary text-white py-3 rounded-xl font-bold w-full">إنشاء حساب</button>
+            <button className="text-secondary font-bold text-right text-lg">تسجيل الدخول</button>
+            <button className="bg-primary text-white py-3.5 rounded-xl font-bold w-full text-lg">إنشاء حساب</button>
           </div>
         </div>
       )}

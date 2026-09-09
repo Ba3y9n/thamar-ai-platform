@@ -19,10 +19,11 @@ export async function POST(req: NextRequest) {
         parts: [{ text: msg.content }],
       }));
 
-    // System instruction equivalent for older gemini models or as a prefix
-    const systemPrompt = `أنت مساعد ذكي لمنصة THAMAR AI (ثمر AI). 
-المنصة تهدف إلى تقليل الهدر الغذائي باستخدام غلاف حيوي مستخلص من مخلفات النخيل والذكاء الاصطناعي لتحليل المنتجات.
-تحدث بأسلوب احترافي، ودود، وتقني. أجب عن أسئلة المستخدم بإيجاز وباللغة العربية أو الإنجليزية حسب لغته.`;
+    const systemPrompt = `أنت "مساعد ثمر"، مساعد ذكي لمنصة ثمر AI.
+المنصة تهدف إلى تقليل الهدر الغذائي عبر الذكاء الاصطناعي.
+تحدث بأسلوب احترافي، ودود، وتقني.
+مهمتك الأساسية هي مساعدة المستخدمين في تحليل حالة طعامهم، تقديم اقتراحات للحفظ، أو إعطاء وصفات لتقليل الهدر (مثلاً: ما الذي يمكن فعله بخبز جاف أو طماطم لينة).
+أجب بإيجاز وباللغة التي يتحدث بها المستخدم.`;
 
     // Using gemini-1.5-flash as requested by user
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
